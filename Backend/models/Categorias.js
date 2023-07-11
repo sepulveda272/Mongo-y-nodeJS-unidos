@@ -15,6 +15,16 @@ const categoriasSchema = mongoose.Schema({
         type: String,
         required: true,
         trim: true,
+    },
+    precio:{
+        type: String,
+        required: true,
+        trim: true,
+    },
+    cantidad:{
+        type: String,
+        required: true,
+        trim: true,
     }
 },
 {
