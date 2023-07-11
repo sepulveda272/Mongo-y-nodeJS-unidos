@@ -19,15 +19,17 @@ tablaCategoria.addEventListener('click', confirmDelete)
 async function mostrarLista(){
     const categorias = await obtainCategories();
     categorias.forEach(element => {
-        const {CategoriaID,CategoriaNombre,Descripcion,Imagen} = element
+        const {_id,CategoriaNombre,Descripcion,Imagen,precio,cantidad} = element
         tablaCategoria.innerHTML+=`
         <tr>
-            <td>${CategoriaID}</td>
+            <td>${_id}</td>
             <td>${CategoriaNombre}</td>
             <td>${Descripcion}</td>
             <td>${Imagen}</td>
-            <th><a class="btn btn-success editar" idActualizar="${CategoriaID}" data-bs-toggle="modal" data-bs-target="#updateCategory" data-bs-whatever="@getbootstrap">EDITAR</a></th>
-            <th><a data-categoria="${CategoriaID}"  class="btn btn-danger delete">ELIMINAR</a></th>
+            <td>${precio}</td>
+            <td>${cantidad}</td>
+            <th><a class="btn btn-success editar" idActualizar="${_id}" data-bs-toggle="modal" data-bs-target="#updateCategory" data-bs-whatever="@getbootstrap">EDITAR</a></th>
+            <th><a idCategoria="${_id}"  class="btn btn-danger delete">ELIMINAR</a></th>
           </tr>
         `
     })
@@ -43,11 +45,15 @@ function validarCategoria(e){
     const CategoriaNombre = document.querySelector("#CategoriaNombre").value;
     const Descripcion = document.querySelector("#Descripcion").value;
     const Imagen = document.querySelector("#Imagen").value;
+    const precio = document.querySelector("#precio").value;
+    const cantidad = document.querySelector("#cantidad").value;
 
     const categoria = {
         CategoriaNombre,
         Descripcion,
-        Imagen
+        Imagen,
+        precio,
+        cantidad
     }
     if(validate(categoria)){
         alert ('todos los campos son obligatirios')
@@ -67,7 +73,7 @@ function validarCategoria(e){
 
 function confirmDelete(e){
     if(e.target.classList.contains('delete')){
-        const categoriaID = parseInt(e.target.dataset.categoria)
+        const categoriaID = e.target.getAttribute('idCategoria')
         console.log(categoriaID);
         const confirmar = confirm('¿DESEAS ELIMNAR LA CATEGORIA?')
         if(confirmar){
@@ -102,14 +108,18 @@ function actualizar(e){
         const  CategoriaNombre = document.querySelector('#CategoriaNombreUpdate').value;
         const  Descripcion = document.querySelector('#DescripcionUpdate').value;
         const  Imagen = document.querySelector('#ImagenUpdate').value;
+        const  precio = document.querySelector('#precioUpdate').value;
+        const  cantidad = document.querySelector('#cantidadUpdate').value;
         console.log(CategoriaNombre);
         
     
         const datos={
-            CategoriaID:idActualizar,
+            _id:idActualizar,
             CategoriaNombre,
             Descripcion,
-            Imagen
+            Imagen,
+            precio,
+            cantidad
         }
         console.log(datos);
     

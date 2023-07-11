@@ -1,4 +1,7 @@
 const url = "http://localhost:5000/categorias/all";
+const urlNuevo = "http://localhost:5000/categorias/add";
+const urlBorrar = "http://localhost:5000/categorias/del";
+const urlActualizar = "http://localhost:5000/categorias/upd";
 
 
 export const obtainCategories = async () => {
@@ -14,7 +17,7 @@ export const obtainCategories = async () => {
 
 export const nuevaCategoria = async (categoria) => {
     try {
-        await fetch(url,{
+        await fetch(urlNuevo,{
             method: "POST",
             body:JSON.stringify(categoria),
             headers:{'Content-Type':'application/json'}
@@ -26,9 +29,9 @@ export const nuevaCategoria = async (categoria) => {
 };
 
 
-export const deleteCategory = async (id) => {
+export const deleteCategory = async (categoriaID) => {
   try {
-        await fetch(`${url}/${id}`,{
+        await fetch(`${urlBorrar}/${categoriaID}`,{
             method:'DELETE'
         })
         window.location.href ="index.html"
@@ -53,8 +56,8 @@ export const deleteCategory = async (id) => {
 
 export const editarCategory = async (datos) => {
     try {
-        await fetch(`${url}/${datos.CategoriaID}`, {
-            method: "PUT",
+        await fetch(`${urlActualizar}/${datos._id}`, {
+            method: "PATCH",
             headers:{'Content-Type':'application/json'},
             body:JSON.stringify(datos)
         }).then(response => response.json()).then(updatedDatos => {
