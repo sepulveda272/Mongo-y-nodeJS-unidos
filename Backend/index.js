@@ -1,13 +1,18 @@
 import express from "express";
 import dotenv from "dotenv";
 import conectarDB from "./config/config.js";
+import cors from "cors";
 import categoriasRouter from "./routes/categorias.routes.js";
 
 const app = express();
 
-app.use("/home",express.static('frontend/categorias'))
-
 app.use(express.json());
+
+const configCors = {
+    methods: ['POST','GET','PUT','DELETE']
+}
+
+app.use(cors(configCors))
 
 dotenv.config();
 
