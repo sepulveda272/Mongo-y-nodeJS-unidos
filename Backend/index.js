@@ -9,7 +9,7 @@ const app = express();
 app.use(express.json());
 
 const configCors = {
-    methods: ['POST','GET','PUT','DELETE']
+    methods: ['POST','GET','PATCH','DELETE']
 }
 
 app.use(cors(configCors))
