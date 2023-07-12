@@ -5,7 +5,7 @@ import categoriasRouter from "./routes/categorias.routes.js";
 
 const app = express();
 
-app.use("/home",express.static('frontend'))
+app.use("/home",express.static('frontend/categorias'))
 
 app.use(express.json());
 
